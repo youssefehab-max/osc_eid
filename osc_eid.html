@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خروف OSC — عيد أضحى مبارك</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; min-height: 100vh;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  overflow-x: hidden;
+  cursor: none;
+  background: #FFF6E0;
+}
+
+/* ══════════════════════════════
+   FULL PAGE BACKGROUND
+══════════════════════════════ */
+#bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(212,160,23,0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 15%, rgba(192,82,42,0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 90%, rgba(212,160,23,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(46,125,50,0.08) 0%, transparent 40%),
+    linear-gradient(175deg, #FFF9EC 0%, #FFF3D0 40%, #FFE8B0 100%);
+  pointer-events: none;
+}
+
+/* Islamic geometric tile pattern */
+#bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(212,160,23,0.04) 0px, transparent 1px, transparent 28px, rgba(212,160,23,0.04) 29px),
+    repeating-linear-gradient(-45deg, rgba(212,160,23,0.04) 0px, transparent 1px, transparent 28px, rgba(212,160,23,0.04) 29px);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════
+   CURSOR
+══════════════════════════════ */
+#cursor {
+  position: fixed; width: 44px; height: 44px;
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%) rotate(-40deg);
+  transition: transform 0.08s;
+  display: none;
+}
+
+/* ══════════════════════════════
+   TOP BUNTING — FULL WIDTH
+══════════════════════════════ */
+#bunting-top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  height: 44px; pointer-events: none;
+}
+.bunting-rope {
+  position: absolute; top: 4px; left: 0; right: 0; height: 3px;
+  background: #7A5C10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+.flags-row {
+  display: flex; position: absolute; top: 0; left: 0; right: 0;
+  width: 100%;
+}
+.flag {
+  height: 28px; flex: 1;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  min-width: 0;
+}
+
+/* ══════════════════════════════
+   SCATTERED DECO ACROSS FULL PAGE
+══════════════════════════════ */
+.deco-item {
+  position: fixed; pointer-events: none; z-index: 5;
+  animation: floatDeco 4s ease-in-out infinite;
+}
+@keyframes floatDeco {
+  0%,100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+}
+
+/* side bunting strings */
+.side-string {
+  position: fixed; top: 44px; bottom: 0; width: 48px;
+  pointer-events: none; z-index: 5;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 60px; padding-top: 30px;
+}
+.side-flag {
+  width: 32px; height: 42px;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+  flex-shrink: 0;
+  animation: sideSway 3s ease-in-out infinite;
+}
+.side-flag:nth-child(even) { animation-delay: 0.5s; }
+@keyframes sideSway {
+  0%,100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+.side-string-left  { left: 0; }
+.side-string-right { right: 0; }
+
+/* ══════════════════════════════
+   STARS / MOONS floating
+══════════════════════════════ */
+.float-star {
+  position: fixed; pointer-events: none; z-index: 4;
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+@keyframes starTwinkle {
+  0%,100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+/* ══════════════════════════════
+   PAGE CONTENT
+══════════════════════════════ */
+#page {
+  position: relative; z-index: 10;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 90px 20px 60px;
+}
+
+/* ══════════════════════════════
+   TITLE
+══════════════════════════════ */
+.title-wrap { text-align: center; }
+.main-title {
+  font-size: clamp(52px, 9vw, 88px);
+  font-weight: 900; color: #3E1C00;
+  text-shadow: 3px 3px 0 #D4A017, 6px 6px 0 rgba(212,160,23,0.25);
+  animation: titleFloat 2.8s ease-in-out infinite;
+  line-height: 1.2;
+}
+@keyframes titleFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.015); }
+}
+.osc-sub {
+  font-size: 15px; color: #8B5E00; opacity: 0.75;
+  margin-top: 6px; letter-spacing: 3px; text-transform: uppercase;
+}
+.hint-text {
+  font-size: 18px; color: #C0522A; margin-top: 12px;
+  animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+/* ══════════════════════════════
+   SCENE / WALKING SHEEP
+══════════════════════════════ */
+#scene {
+  position: relative; width: 100%; max-width: 1000px;
+  height: 220px; margin-top: 16px;
+  overflow: hidden; border-radius: 24px;
+}
+
+/* Ground */
+#ground {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 75px;
+  background: linear-gradient(180deg, #C8A420 0%, #A07A10 100%);
+  border-radius: 60% 60% 0 0 / 35% 35% 0 0;
+}
+#ground::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg,
+    rgba(255,255,255,0.1) 0px, transparent 24px);
+  border-radius: inherit;
+}
+#ground::after {
+  content: '🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿 🌿';
+  position: absolute; top: -14px; left: 0; right: 0;
+  font-size: 18px; text-align: justify; padding: 0 10px;
+  opacity: 0.7;
+}
+
+/* Sheep walking image */
+#sheep-wrap {
+  position: absolute; bottom: 68px; width: 110px; height: 110px;
+  animation: sheepWalk 10s linear infinite;
+  cursor: none; z-index: 8;
+  image-rendering: crisp-edges;
+  /* gentle bob to simulate walking feel */
+  filter: drop-shadow(0 8px 8px rgba(0,0,0,0.2));
+}
+#sheep-wrap img {
+  width: 110px; height: 110px;
+  animation: sheepBob 0.35s ease-in-out infinite alternate;
+}
+@keyframes sheepBob {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(4px); }
+}
+@keyframes sheepWalk {
+  0%   { left: -130px; transform: scaleX(1); }
+  48%  { left: calc(100% + 20px); transform: scaleX(1); }
+  50%  { left: calc(100% + 20px); transform: scaleX(-1); }
+  98%  { left: -130px; transform: scaleX(-1); }
+  100% { left: -130px; transform: scaleX(1); }
+}
+
+/* OSC badge on sheep */
+#sheep-badge {
+  position: absolute; bottom: 68px; z-index: 9;
+  animation: sheepWalk 10s linear infinite;
+  pointer-events: none;
+}
+#sheep-badge span {
+  display: inline-block;
+  background: rgba(62,28,0,0.88);
+  color: white; font-size: 10px; font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  padding: 2px 8px; border-radius: 10px;
+  white-space: nowrap;
+  transform: translateY(-4px);
+}
+
+/* ══════════════════════════════
+   POPUP OVERLAY
+══════════════════════════════ */
+#overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(30,10,0,0.68);
+  z-index: 500; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+}
+#overlay.show { display: flex; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+#popup {
+  background: linear-gradient(145deg, #FFFDF5, #FFF4D0);
+  border: 3px solid #D4A017; border-radius: 28px;
+  padding: 36px 44px 30px; text-align: center;
+  max-width: 500px; width: 92%;
+  box-shadow: 0 24px 70px rgba(80,40,0,0.45);
+  animation: popIn 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes popIn {
+  from { transform: scale(0.15) rotate(-18deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.pop-icons { font-size: 40px; margin-bottom: 14px; }
+.pop-title  { font-size: 32px; font-weight: 900; color: #3E1C00; line-height: 1.5; margin-bottom: 10px; }
+.pop-body   { font-size: 17px; color: #6B3A00; line-height: 2.1; margin-bottom: 22px; }
+
+/* feast dish SVG */
+#dish-wrap {
+  margin: 0 auto 10px; width: 170px; height: 130px;
+  animation: dishWobble 1.8s ease-in-out infinite;
+}
+@keyframes dishWobble {
+  0%,100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-6px); }
+}
+.feast-cap { font-size: 24px; font-weight: 900; color: #C0522A; margin-bottom: 20px; }
+
+.close-btn {
+  padding: 13px 40px; background: #D4A017; color: white;
+  border: none; border-radius: 50px;
+  font-size: 18px; font-weight: 700; font-family: 'Cairo', sans-serif;
+  cursor: pointer; box-shadow: 0 4px 14px rgba(212,160,23,0.45);
+  transition: all 0.2s;
+}
+.close-btn:hover { background: #B88A0A; transform: scale(1.07); }
+
+/* confetti */
+.cft {
+  position: fixed; pointer-events: none; z-index: 9998;
+  border-radius: 2px;
+  animation: cftFall linear forwards;
+}
+@keyframes cftFall {
+  from { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  to   { transform: translateY(110vh) rotate(900deg); opacity: 0; }
+}
+
+/* steam for dish */
+
+@keyframes bubblePop {
+  0%   { opacity:0; transform:scale(0.5) translateY(10px); }
+  20%  { opacity:1; transform:scale(1.1) translateY(0); }
+  70%  { opacity:1; transform:scale(1) translateY(0); }
+  100% { opacity:0; transform:scale(0.9) translateY(-12px); }
+}
+
+@keyframes steam {
+  0%,100% { transform: translateY(0) scaleX(1); opacity: 0.55; }
+  50% { transform: translateY(-8px) scaleX(1.3); opacity: 0.1; }
+}
+
+/* footer */
+#footer {
+  position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: rgba(62,28,0,0.4); z-index: 30;
+  white-space: nowrap; pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR BLADE -->
+<svg id="cursor" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EEEADF"/>
+      <stop offset="40%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#B0A898"/>
+    </linearGradient>
+    <linearGradient id="hg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A0522D"/>
+      <stop offset="100%" stop-color="#5C2D00"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 2 L27 24 L22 42 L17 24 Z" fill="url(#bg)" stroke="#AAA" stroke-width="0.7"/>
+  <path d="M22 2 L23.5 18 L22 26 L20.5 18 Z" fill="rgba(255,255,255,0.6)"/>
+  <rect x="15" y="23" width="14" height="6" rx="2.5" fill="url(#hg)"/>
+  <rect x="14" y="22.5" width="16" height="3" rx="1.5" fill="#D4A84B"/>
+  <circle cx="22" cy="41" r="3.5" fill="url(#hg)"/>
+  <circle cx="22" cy="41" r="1.8" fill="#D4A84B"/>
+  <circle cx="22" cy="2.5" r="3" fill="#D4A84B"/>
+  <circle cx="22" cy="2.5" r="1.5" fill="#FFD700"/>
+</svg>
+
+<!-- BACKGROUND -->
+<div id="bg"></div>
+
+<!-- ══ TOP BUNTING FULL WIDTH ══ -->
+<div id="bunting-top">
+  <div class="bunting-rope"></div>
+  <div class="flags-row" id="flags-row"></div>
+</div>
+
+<!-- ══ SIDE BUNTINGS ══ -->
+<div class="side-string side-string-left" id="left-string"></div>
+<div class="side-string side-string-right" id="right-string"></div>
+
+<!-- ══ SCATTERED PAGE DECORATIONS ══ -->
+<div id="decos"></div>
+<div id="stars-layer"></div>
+
+<!-- ══ MAIN PAGE ══ -->
+<div id="page">
+  <div class="title-wrap">
+    <div class="main-title">خروف OSC 🐑</div>
+    <div class="osc-sub">Open Source Community · Ain Shams University</div>
+    <div class="hint-text" id="hint">← اضغط على الخروف لتفاجأ 🔪</div>
+  </div>
+
+  <!-- SCENE -->
+  <div id="scene">
+    <!-- ground -->
+    <div id="ground"></div>
+
+    <!-- SHEEP IMAGE -->
+    <div id="sheep-wrap">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTExLjk4MyAzLjU2MmM0LjU0My0uMjYyIDcuODI0IDEuNTk3IDguMDg5IDYuODI2LjIxNSA0LjE5LTUuMTg0IDYuNzktOC4wNDYgNi44NzktMi40NjIuMDc3LTEuMzUzLTEuODUyLjYxLTIuMzM0IDEuNTc2LS4zODcgNC4xMjQtMi40MTMgMy42MDItNC40NC0uNTk3LTIuMzItNC4zMTUtMi42ODQtNi4zNTEuMjkyLS43OTggMS4xNjctMy41NTQuODczLTQuMDk2LS40MzQtLjk1OC0yLjMwOSAxLjIxMS02LjUwMiA2LjE5Mi02Ljc4OXoiLz48cGF0aCBmaWxsPSIjRTFFOEVEIiBkPSJNMzUuNzUgMjEuMzg0YzAtNy43ODMtNC40OTUtMTEuNDA3LTE0LjUxOS0xMS40MDctMS4wODcgMC0yLjA4My4wNTEtMy4wMTguMTM3LTEuMzYtMi40MjMtNC44NDUtMi44MjgtOC4yMTMtMi44MjgtNC4zMDQgMC0xMCA2LjE0NS0xMCAxMC44MzkgMCA0LjYwOCAzLjYwNiA0Ljg2NiA3LjgxMSA0Ljg3NC4yMzMgMy4yNDUgMS4yMjYgNS42NDcgMy4yNDkgNy4yNkMxMS4zMzcgMzEuNDA5IDEyLjU5NCAzNiAxNSAzNmMxLjM1MyAwIDIuMDk5LTEuNjk1IDIuNTEtMy40MTcgMS4xMjguMTM2IDIuMzU5LjIwOSAzLjcyMi4yMDkgMS43MzMgMCAzLjI4OC0uMTE2IDQuNjk1LS4zMzVDMjYuMDE3IDM0LjExNCAyNi40NTggMzYgMjggMzZjMi4zMTcgMCA0LjI3My00Ljk1NiA0LjgzNC02LjUyMSAxLjk2OS0xLjg3IDIuOTE2LTQuNTQ1IDIuOTE2LTguMDk1eiIvPjxjaXJjbGUgZmlsbD0iIzI5MkYzMyIgY3g9IjQuNSIgY3k9IjE1Ljc4NiIgcj0iMS41Ii8+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTE3LjU2MiA0LjMzOWM0LjMxMiAxLjQ1NSA1Ljc0IDQuMTQ4IDQuMDM0IDkuMDk5LTEuMzY3IDMuOTY3LTcuMzQ1IDQuMzYxLTEwLjAzNCAzLjM3NUM5LjI1IDE1Ljk2NCAxMSAxNC41ODkgMTMgMTQuODc1YzEuNjA2LjIzIDQuNzI3LS42OTggNS0yLjc3M0MxOC4zMTIgOS43MjcgMTUgOCAxMiAxMGMtMS4xNzcuNzg1LTUuNzc0LjQzLTUuNS0uOTU4LjYzOC0zLjIyNiA2LjMzNS02LjI5OCAxMS4wNjItNC43MDN6Ii8+PC9zdmc+" alt="sheep">
+    </div>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div id="overlay">
+  <div id="popup">
+    <div class="pop-icons">🎉 🌙 ✨ 🐑</div>
+    <div class="pop-title">عيد أضحى مبارك 🐑✨</div>
+    <div class="pop-body">
+      كل سنة وأنتم بخير<br>
+      أعاده الله عليكم بالخير واليُمن والبركات
+    </div>
+    <div id="dish-wrap">
+      <svg viewBox="0 0 170 130" width="170" height="130" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="85" cy="122" rx="72" ry="8" fill="rgba(0,0,0,0.1)"/>
+        <ellipse cx="85" cy="117" rx="70" ry="11" fill="#C8A020"/>
+        <ellipse cx="85" cy="114" rx="66" ry="9" fill="#E8C840"/>
+        <ellipse cx="85" cy="111" rx="60" ry="8" fill="#FFF8C0"/>
+        <ellipse cx="85" cy="109" rx="56" ry="7" fill="#FFFDE0"/>
+        <ellipse cx="85" cy="70" rx="42" ry="28" fill="#7B3A14"/>
+        <path d="M50 73 Q60 46 85 53 Q110 46 120 73 Q108 96 85 90 Q62 96 50 73Z" fill="#9B4A20"/>
+        <path d="M58 70 Q66 50 85 55 Q104 50 112 70 Q104 85 85 80 Q66 85 58 70Z" fill="#B85828"/>
+        <ellipse cx="72" cy="64" rx="9" ry="6" fill="#6B3010" opacity="0.45"/>
+        <ellipse cx="90" cy="59" rx="8" ry="5" fill="#6B3010" opacity="0.38"/>
+        <ellipse cx="80" cy="73" rx="8" ry="5" fill="#6B3010" opacity="0.38"/>
+        <!-- bones -->
+        <rect x="48" y="38" width="8" height="40" rx="4" fill="#8B4A1A" stroke="#5C2A00" stroke-width="0.6"/>
+        <rect x="114" y="38" width="8" height="40" rx="4" fill="#8B4A1A" stroke="#5C2A00" stroke-width="0.6"/>
+        <ellipse cx="52" cy="38" rx="8" ry="6" fill="#D4A84B" stroke="#B88A0A" stroke-width="0.8"/>
+        <ellipse cx="118" cy="38" rx="8" ry="6" fill="#D4A84B" stroke="#B88A0A" stroke-width="0.8"/>
+        <!-- garnish -->
+        <circle cx="38" cy="97" r="5.5" fill="#C62828" opacity="0.88"/>
+        <circle cx="132" cy="95" r="5.5" fill="#C62828" opacity="0.88"/>
+        <circle cx="62" cy="106" r="4.5" fill="#C62828" opacity="0.88"/>
+        <circle cx="108" cy="106" r="4.5" fill="#C62828" opacity="0.88"/>
+        <circle cx="85" cy="108" r="5" fill="#2E7D32" opacity="0.88"/>
+        <circle cx="55" cy="103" r="3.5" fill="#2E7D32" opacity="0.75"/>
+        <circle cx="115" cy="103" r="3.5" fill="#2E7D32" opacity="0.75"/>
+        <!-- steam -->
+        <path d="M74 45 Q70 36 74 27" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" style="animation:steam 1.8s ease-in-out infinite" opacity="0.6"/>
+        <path d="M85 40 Q81 30 85 20" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" style="animation:steam 1.8s ease-in-out infinite;animation-delay:0.5s" opacity="0.5"/>
+        <path d="M96 45 Q100 36 96 27" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" style="animation:steam 1.8s ease-in-out infinite;animation-delay:0.3s" opacity="0.6"/>
+      </svg>
+    </div>
+    <div class="feast-cap">جاهز للفتة 😄🍚</div>
+    <button class="close-btn" onclick="closePopup()">تمام يسطا 👍</button>
+  </div>
+</div>
+
+<div id="footer">OSC × Ain Shams University — عيد أضحى مبارك ١٤٤٦ 🐑</div>
+
+<style>
+@keyframes steam {
+  0%,100% { transform: translateY(0) scaleX(1); opacity: 0.5; }
+  50%      { transform: translateY(-8px) scaleX(1.3); opacity: 0.08; }
+}
+</style>
+
+<script>
+// ── CURSOR
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.display = 'block';
+  cur.style.left = e.clientX + 'px';
+  cur.style.top  = e.clientY + 'px';
+});
+document.addEventListener('mousedown', () => {
+  cur.style.transform = 'translate(-50%,-50%) rotate(5deg) scale(0.82)';
+});
+document.addEventListener('mouseup', () => {
+  cur.style.transform = 'translate(-50%,-50%) rotate(-40deg) scale(1)';
+});
+
+// ── BUILD TOP BUNTING (full width with enough flags)
+function buildTopBunting() {
+  const row = document.getElementById('flags-row');
+  const colors = ['#D4A017','#2E7D32','#C62828','#1565C0','#6A1B9A','#E65100','#00838F'];
+  const count = Math.ceil(window.innerWidth / 30) + 4;
+  row.innerHTML = '';
+  for (let i = 0; i < count; i++) {
+    const f = document.createElement('div');
+    f.className = 'flag';
+    f.style.background = colors[i % colors.length];
+    row.appendChild(f);
+  }
+}
+buildTopBunting();
+window.addEventListener('resize', buildTopBunting);
+
+// ── BUILD SIDE STRINGS
+function buildSideStrings() {
+  const colors = ['#D4A017','#2E7D32','#C62828','#1565C0','#6A1B9A','#E65100'];
+  const vh = window.innerHeight;
+  const count = Math.ceil(vh / 70) + 2;
+  ['left-string','right-string'].forEach(id => {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const f = document.createElement('div');
+      f.className = 'side-flag';
+      f.style.background = colors[i % colors.length];
+      el.appendChild(f);
+    }
+  });
+}
+buildSideStrings();
+window.addEventListener('resize', buildSideStrings);
+
+// ── SCATTER DECORATIONS ACROSS FULL PAGE
+const decoEl = document.getElementById('decos');
+const decoList = [
+  { emoji: '🪔', top:'12%', left:'8%',  size:32, delay:0,   rot:'--r:-8deg' },
+  { emoji: '🕌', top:'8%',  left:'16%', size:28, delay:0.4, rot:'--r:5deg' },
+  { emoji: '🪔', top:'12%', right:'8%', size:32, delay:0.2, rot:'--r:8deg' },
+  { emoji: '🕌', top:'8%',  right:'16%',size:28, delay:0.7, rot:'--r:-5deg' },
+  { emoji: '🪔', top:'35%', left:'2%',  size:26, delay:1,   rot:'--r:-10deg' },
+  { emoji: '🪔', top:'35%', right:'2%', size:26, delay:0.6, rot:'--r:10deg' },
+  { emoji: '🕌', top:'60%', left:'3%',  size:28, delay:1.3, rot:'--r:-6deg' },
+  { emoji: '🕌', top:'60%', right:'3%', size:28, delay:0.9, rot:'--r:6deg' },
+  { emoji: '🪔', top:'80%', left:'5%',  size:26, delay:0.5, rot:'--r:-8deg' },
+  { emoji: '🪔', top:'80%', right:'5%', size:26, delay:1.1, rot:'--r:8deg' },
+  { emoji: '🌙', top:'18%', left:'50%', size:30, delay:0.3, rot:'--r:0deg' },
+];
+decoList.forEach(d => {
+  const div = document.createElement('div');
+  div.className = 'deco-item';
+  div.textContent = d.emoji;
+  div.style.fontSize = d.size + 'px';
+  div.style.top = d.top || '';
+  div.style.left = d.left || '';
+  div.style.right = d.right || '';
+  div.style.animationDelay = d.delay + 's';
+  div.style.setProperty('--r', d.rot.split(':')[1]);
+  decoEl.appendChild(div);
+});
+
+// ── SCATTER STARS
+const starsEl = document.getElementById('stars-layer');
+const starEmojis = ['✨','⭐','🌟','💫'];
+const positions = [
+  {t:'25%',l:'20%'},{t:'15%',l:'35%'},{t:'22%',l:'65%'},{t:'18%',l:'80%'},
+  {t:'45%',l:'12%'},{t:'42%',l:'88%'},{t:'65%',l:'15%'},{t:'68%',l:'84%'},
+  {t:'75%',l:'30%'},{t:'72%',l:'70%'},{t:'88%',l:'20%'},{t:'90%',l:'75%'},
+  {t:'50%',l:'50%'},{t:'30%',l:'45%'},{t:'55%',l:'25%'},
+];
+positions.forEach((p, i) => {
+  const s = document.createElement('div');
+  s.className = 'float-star';
+  s.textContent = starEmojis[i % starEmojis.length];
+  s.style.cssText = `top:${p.t};left:${p.l};font-size:${16+Math.floor(Math.random()*10)}px;animation-delay:${(Math.random()*3).toFixed(2)}s;`;
+  starsEl.appendChild(s);
+});
+
+// ── SHEEP CLICK
+let clicked = false;
+const sheep = document.getElementById('sheep-wrap');
+const hint  = document.getElementById('hint');
+const overlay = document.getElementById('overlay');
+
+sheep.addEventListener('click', function() {
+  if (clicked) return;
+  clicked = true;
+  showBubble();
+
+  const r = sheep.getBoundingClientRect();
+  const sr = document.getElementById('scene').getBoundingClientRect();
+  sheep.style.animation = 'none';
+  sheep.style.left = (r.left - sr.left) + 'px';
+
+  // flash
+  sheep.style.transition = 'all 0.25s';
+  sheep.style.filter = 'drop-shadow(0 0 18px #FF4500) drop-shadow(0 0 35px #FFD700) brightness(1.3)';
+  sheep.style.transform = 'scale(1.25)';
+
+  hint.textContent = '💥 الله أكبر!! 💥';
+  hint.style.color = '#C62828';
+  hint.style.fontSize = '22px';
+
+  spawnConfetti(50);
+
+  setTimeout(() => {
+    sheep.style.opacity = '0';
+    overlay.classList.add('show');
+  }, 550);
+});
+
+function closePopup() {
+  overlay.classList.remove('show');
+  sheep.style.opacity = '1';
+  sheep.style.filter  = 'drop-shadow(0 8px 8px rgba(0,0,0,0.2))';
+  sheep.style.transform = '';
+  sheep.style.left = '';
+  sheep.style.animation = 'sheepWalk 10s linear infinite';
+  clicked = false;
+  hint.textContent = '← اضغط على الخروف لتفاجأ 🔪';
+  hint.style.color = '#C0522A';
+  hint.style.fontSize = '18px';
+  document.querySelectorAll('.cft').forEach(c => c.remove());
+}
+
+function spawnConfetti(n) {
+  const colors = ['#D4A017','#2E7D32','#C62828','#1565C0','#6A1B9A','#FF8C00','#E91E63'];
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('div');
+    el.className = 'cft';
+    const size = 6 + Math.random() * 9;
+    el.style.cssText = `left:${5+Math.floor(Math.random()*90)}vw;top:-15px;width:${Math.floor(size)}px;height:${Math.floor(size)}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};animation-duration:${(1.4+Math.random()*2.2).toFixed(2)}s;animation-delay:${(Math.random()*0.7).toFixed(2)}s;`;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+}
+
+
+scheduleRandomBaa();
+
+// ── FLOATING SPEECH BUBBLE on baa ──
+function showBubble() {
+  const scene = document.getElementById('scene');
+  const sheepEl = document.getElementById('sheep-wrap');
+  const bubble = document.createElement('div');
+  bubble.textContent = 'ماااااء 🐑';
+  bubble.style.cssText = `
+    position:absolute;
+    left:${parseInt(sheepEl.style.left || '0') + 20}px;
+    bottom:170px;
+    background:white;
+    border:2px solid #D4A017;
+    border-radius:16px 16px 16px 4px;
+    padding:6px 14px;
+    font-family:Cairo,sans-serif;
+    font-size:16px;
+    font-weight:700;
+    color:#3E1C00;
+    white-space:nowrap;
+    z-index:20;
+    pointer-events:none;
+    animation:bubblePop 1.6s ease forwards;
+  `;
+  scene.appendChild(bubble);
+  setTimeout(() => bubble.remove(), 1600);
+}
+
+</script>
+</body>
+</html>
