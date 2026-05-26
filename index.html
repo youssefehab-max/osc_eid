@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خروف OSC — عيد أضحى مبارك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg id="cursor" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="cursor-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#EEEADF"/>
+            <stop offset="40%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#B0A898"/>
+        </linearGradient>
+        <linearGradient id="cursor-hg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#A0522D"/>
+            <stop offset="100%" stop-color="#5C2D00"/>
+        </linearGradient>
+    </defs>
+    <path d="M22 2 L27 24 L22 42 L17 24 Z" fill="url(#cursor-bg)" stroke="#AAA" stroke-width="0.7"/>
+    <path d="M22 2 L23.5 18 L22 26 L20.5 18 Z" fill="rgba(255,255,255,0.6)"/>
+    <rect x="15" y="23" width="14" height="6" rx="2.5" fill="url(#cursor-hg)"/>
+    <rect x="14" y="22.5" width="16" height="3" rx="1.5" fill="#D4A84B"/>
+    <circle cx="22" cy="41" r="3.5" fill="url(#cursor-hg)"/>
+    <circle cx="22" cy="41" r="1.8" fill="#D4A84B"/>
+    <circle cx="22" cy="2.5" r="3" fill="#D4A84B"/>
+    <circle cx="22" cy="2.5" r="1.5" fill="#FFD700"/>
+</svg>
+
+<div id="bg"></div>
+
+<div id="bunting-top">
+    <div class="bunting-rope"></div>
+    <div class="flags-row" id="flags-row"></div>
+</div>
+
+<div class="side-string side-string-left" id="left-string"></div>
+<div class="side-string side-string-right" id="right-string"></div>
+
+<div id="decos"></div>
+<div id="stars-layer"></div>
+
+<div id="page">
+    <div class="title-wrap">
+        <div class="main-title">خروف OSC 🐑</div>
+        <div class="osc-sub">Open Source Community · Ain Shams University</div>
+        <div class="hint-text" id="hint">← اضغط على الخروف لتفاجأ 🔪</div>
+    </div>
+
+    <div id="scene">
+        <div id="ground"></div>
+
+       <div id="sheep-wrap">
+  <img
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0ZGQUMzMyIgZD0iTTExLjk4MyAzLjU2MmM0LjU0My0uMjYyIDcuODI0IDEuNTk3IDguMDg5IDYuODI2LjIxNSA0LjE5LTUuMTg0IDYuNzktOC4wNDYgNi44NzktMi40NjIuMDc3LTEuMzUzLTEuODUyLjYxLTIuMzM0IDEuNTc2LS4zODcgNC4xMjQtMi40MTMgMy42MDItNC40NC0uNTk3LTIuMzItNC4zMTUtMi42ODQtNi4zNTEuMjkyLS43OTggMS4xNjctMy41NTQuODczLTQuMDk2LS40MzQtLjk1OC0yLjMwOSAxLjIxMS02LjUwMiA2LjE5Mi02Ljc4OXoiLz48cGF0aCBmaWxsPSIjRTFFOEVEIiBkPSJNMzUuNzUgMjEuMzg0YzAtNy43ODMtNC40OTUtMTEuNDA3LTE0LjUxOS0xMS40MDctMS4wODcgMC0yLjA4My4wNTEtMy4wMTguMTM3LTEuMzYtMi40MjMtNC44NDUtMi44MjgtOC4yMTMtMi44MjgtNC4zMDQgMC0xMCA2LjE0NS0xMCAxMC44MzkgMCA0LjYwOCAzLjYwNiA0Ljg2NiA3LjgxMSA0Ljg3NC4yMzMgMy4yNDUgMS4yMjYgNS42NDcgMy4yNDkgNy4yNkMxMS4zMzcgMzEuNDA5IDEyLjU5NCAzNiAxNSAzNmMxLjM1MyAwIDIuMDk5LTEuNjk1IDIuNTEtMy40MTcgMS4xMjguMTM2IDIuMzU5LjIwOSAzLjcyMi4yMDkgMS43MzMgMCAzLjI4OC0uMTE2IDQuNjk1LS4zMzVDMjYuMDE3IDM0LjExNCAyNi40NTggMzYgMjggMzZjMi4zMTcgMCA0LjI3My00Ljk1NiA0LjgzNC02LjUyMSAxLjk2OS0xLjg3IDIuOTE2LTQuNTQ1IDIuOTE2LTguMDk1eiIvPjxjaXJjbGUgZmlsbD0iIzI5MkYzMyIgY3g9IjQuNSIgY3k9IjE1Ljc4NiIgcj0iMS41Ii8+PHBhdGggZmlsbD0iI0ZGQ0M0RCIgZD0iTTE3LjU2MiA0LjMzOWM0LjMxMiAxLjQ1NSA1Ljc0IDQuMTQ4IDQuMDM0IDkuMDk5LTEuMzY3IDMuOTY3LTcuMzQ1IDQuMzYxLTEwLjAzNCAzLjM3NUM5LjI1IDE1Ljk2NCAxMSAxNC41ODkgMTMgMTQuODc1YzEuNjA2LjIzIDQuNzI3LS42OTggNS0yLjc3M0MxOC4zMTIgOS43MjcgMTUgOCAxMiAxMGMtMS4xNzcuNzg1LTUuNzc0LjQzLTUuNS0uOTU4LjYzOC0zLjIyNiA2LjMzNS02LjI5OCAxMS4wNjItNC43MDN6Ii8+PC9zdmc+"
+    alt="sheep"
+  />
+</div>
+    </div>
+</div>
+
+<div id="overlay">
+    <div id="popup">
+        <div class="pop-icons">🎉 🌙 ✨ 🐑</div>
+        <div class="pop-title">عيد أضحى مبارك 🐑✨</div>
+        <div class="pop-body">
+            كل سنة وأنتم بخير<br>
+            أعاده الله عليكم بالخير واليُمن والبركات
+        </div>
+        <div id="dish-wrap">
+            <svg viewBox="0 0 170 130" width="170" height="130" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="85" cy="122" rx="72" ry="8" fill="rgba(0,0,0,0.1)"/>
+                <ellipse cx="85" cy="117" rx="70" ry="11" fill="#C8A020"/>
+                <ellipse cx="85" cy="114" rx="66" ry="9" fill="#E8C840"/>
+                <ellipse cx="85" cy="111" rx="60" ry="8" fill="#FFF8C0"/>
+                <ellipse cx="85" cy="109" rx="56" ry="7" fill="#FFFDE0"/>
+                <ellipse cx="85" cy="70" rx="42" ry="28" fill="#7B3A14"/>
+                <path d="M50 73 Q60 46 85 53 Q110 46 120 73 Q108 96 85 90 Q62 96 50 73Z" fill="#9B4A20"/>
+                <path d="M58 70 Q66 50 85 55 Q104 50 112 70 Q104 85 85 80 Q66 85 58 70Z" fill="#B85828"/>
+                <ellipse cx="72" cy="64" rx="9" ry="6" fill="#6B3010" opacity="0.45"/>
+                <ellipse cx="90" cy="59" rx="8" ry="5" fill="#6B3010" opacity="0.38"/>
+                <ellipse cx="80" cy="73" rx="8" ry="5" fill="#6B3010" opacity="0.38"/>
+                <rect x="48" y="38" width="8" height="40" rx="4" fill="#8B4A1A" stroke="#5C2A00" stroke-width="0.6"/>
+                <rect x="114" y="38" width="8" height="40" rx="4" fill="#8B4A1A" stroke="#5C2A00" stroke-width="0.6"/>
+                <ellipse cx="52" cy="38" rx="8" ry="6" fill="#D4A84B" stroke="#B88A0A" stroke-width="0.8"/>
+                <ellipse cx="118" cy="38" rx="8" ry="6" fill="#D4A84B" stroke="#B88A0A" stroke-width="0.8"/>
+                <circle cx="38" cy="97" r="5.5" fill="#C62828" opacity="0.88"/>
+                <circle cx="132" cy="95" r="5.5" fill="#C62828" opacity="0.88"/>
+                <circle cx="62" cy="106" r="4.5" fill="#C62828" opacity="0.88"/>
+                <circle cx="108" cy="106" r="4.5" fill="#C62828" opacity="0.88"/>
+                <circle cx="85" cy="108" r="5" fill="#2E7D32" opacity="0.88"/>
+                <circle cx="55" cy="103" r="3.5" fill="#2E7D32" opacity="0.75"/>
+                <circle cx="115" cy="103" r="3.5" fill="#2E7D32" opacity="0.75"/>
+                <path d="M74 45 Q70 36 74 27" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" class="steam-path-1" opacity="0.6"/>
+                <path d="M85 40 Q81 30 85 20" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" class="steam-path-2" opacity="0.5"/>
+                <path d="M96 45 Q100 36 96 27" stroke="#CCC" stroke-width="2.5" fill="none" stroke-linecap="round" class="steam-path-3" opacity="0.6"/>
+            </svg>
+        </div>
+        <div class="feast-cap">جاهز للفتة 😄🍚</div>
+        <button class="close-btn" onclick="closePopup()">تمام يسطا 👍</button>
+    </div>
+</div>
+
+<div id="footer">OSC × Ain Shams University — عيد أضحى مبارك ١٤٤٦ 🐑</div>
+
+<script src="script.js"></script>
+</body>
+</html>
